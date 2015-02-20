@@ -22,14 +22,24 @@ public class PrinterApplication extends Applet implements Application {
         sendPrintToArgox(personName, company, position, supplier);
     }
 
-    public void sendPrintToArgox(final String personName, final String company, final String position, final String supplier) {
+    public String getTest() {
+        return "success";
+    }
 
-        final SimplePrintTemplate simplePrintTemplate = new SimplePrintTemplate(personName, company, position, supplier);
+    public boolean sendPrintToArgox(final String personName, final String company, final String position, final String supplier) {
 
-        final ArgoxPrinterHandler argoxPrinterHandler = new ArgoxPrinterHandler(simplePrintTemplate);
+        try {
+            final SimplePrintTemplate simplePrintTemplate = new SimplePrintTemplate(personName, company, position, supplier);
 
-        argoxPrinterHandler.print();
+            final ArgoxPrinterHandler argoxPrinterHandler = new ArgoxPrinterHandler(simplePrintTemplate);
 
+            argoxPrinterHandler.print();
+        } catch (Exception e) {
+            e.printStackTrace();
+            return false;
+        }
+
+        return true;
     }
 
 }
