@@ -1,45 +1,48 @@
 package br.com.kauedb.web_printer_handler;
 
-import java.applet.Applet;
+import javax.swing.*;
 
 /**
  * Created by Kaue
  */
-public class PrinterApplication extends Applet implements Application {
-
-    @Override
-    public void start() {
-        sendPrintToArgox();
-    }
-
-    public void sendPrintToArgox() {
-
-        final String personName = getParameter("personName");
-        final String company = getParameter("company");
-        final String position = getParameter("position");
-        final String supplier = getParameter("supplier");
-
-        sendPrintToArgox(personName, company, position, supplier);
-    }
+public class PrinterApplication extends JApplet implements Application {
 
     public String getTest() {
         return "success";
     }
 
-    public boolean sendPrintToArgox(final String personName, final String company, final String position, final String supplier) {
+    public boolean sendPrintToArgox(final String personName, final String company, final String position, final String supplier, final String barcode) {
 
-        try {
-            final SimplePrintTemplate simplePrintTemplate = new SimplePrintTemplate(personName, company, position, supplier);
+        if (StringHelper.isNotBlank(personName)
+                && StringHelper.isNotBlank(company)
+                && StringHelper.isNotBlank(position)
+                && StringHelper.isNotBlank(supplier)) {
 
-            final ArgoxPrinterHandler argoxPrinterHandler = new ArgoxPrinterHandler(simplePrintTemplate);
 
-            argoxPrinterHandler.print();
-        } catch (Exception e) {
-            e.printStackTrace();
-            return false;
+            try {
+                final SimplePrintTemplate simplePrintTemplate = new SimplePrintTemplate(personName, company, position, supplier, barcode);
+
+                final ArgoxPrinterHandler argoxPrinterHandler = new ArgoxPrinterHandler(simplePrintTemplate);
+
+                argoxPrinterHandler.print();
+            } catch (Exception e) {
+                e.printStackTrace();
+                return false;
+            }
+            return true;
         }
 
-        return true;
+        return false;
+    }
+
+    public static class StringHelper {
+        public static boolean isBlank(final String str) {
+            return str == null || "".equals(str.trim());
+        }
+
+        public static boolean isNotBlank(final String str) {
+            return !isBlank(str);
+        }
     }
 
 }

@@ -9,17 +9,19 @@ class SimplePrintTemplate implements PrintTemplate {
     private final String company;
     private final String position;
     private final String supplier;
+    private final String barcode;
 
     public SimplePrintTemplate(
             String personName,
             String company,
             String position,
-            String supplier
-    ) {
+            String supplier,
+            String barcode) {
         this.personName = personName;
         this.company = company;
         this.position = position;
         this.supplier = supplier;
+        this.barcode = barcode;
     }
 
     @Override
