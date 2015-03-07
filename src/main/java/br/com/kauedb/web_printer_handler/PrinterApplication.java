@@ -7,17 +7,28 @@ import javax.swing.*;
  */
 public class PrinterApplication extends JApplet implements Application {
 
+    public static void main(String[] args) {
+        for (int i = 0; i < Integer.MAX_VALUE - 1; i++) {
+            System.out.println(i);
+        }
+    }
+
     public String getTest() {
         return "success";
     }
 
-    public boolean sendPrintToArgox(final String personName, final String company, final String position, final String supplier, final String barcode) {
+    public String sendPrintToArgox(final String personName
+            , final String company
+            , final String position
+            , final String supplier
+            , final String barcode) {
 
         if (StringHelper.isNotBlank(personName)
                 && StringHelper.isNotBlank(company)
                 && StringHelper.isNotBlank(position)
-                && StringHelper.isNotBlank(supplier)) {
-
+                && StringHelper.isNotBlank(supplier)
+                && StringHelper.isNotBlank(barcode)
+                ) {
 
             try {
                 final SimplePrintTemplate simplePrintTemplate = new SimplePrintTemplate(personName, company, position, supplier, barcode);
@@ -25,17 +36,17 @@ public class PrinterApplication extends JApplet implements Application {
                 final ArgoxPrinterHandler argoxPrinterHandler = new ArgoxPrinterHandler(simplePrintTemplate);
 
                 argoxPrinterHandler.print();
-            } catch (Exception e) {
-                e.printStackTrace();
-                return false;
+            } catch (Throwable e) {
+                return e.getLocalizedMessage();
             }
-            return true;
+            return "success";
         }
 
-        return false;
+        return "fail";
     }
 
     public static class StringHelper {
+
         public static boolean isBlank(final String str) {
             return str == null || "".equals(str.trim());
         }

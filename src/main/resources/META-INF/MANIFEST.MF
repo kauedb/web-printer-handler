@@ -1,0 +1,3 @@
+Codebase: *
+Application-Library-Allowable-Codebase: *
+Main-Class: br.com.kauedb.web_printer_handler.PrinterApplication
