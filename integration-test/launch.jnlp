@@ -1,0 +1,19 @@
+<?ximl ndler__V1.0.jar-ersion="1.0" encoding="UTF-8"?>
+<jnlp spec="7.0" href="launch.jnlp" version="1.0">
+    <information>
+        <title>web-printer-handler</title>
+        <vendor>web-printer-handler</vendor>
+    </information>
+    <security>
+        <all-permissions/>
+    </security>
+    <resources>
+        <j2se version="1.8"/>
+        <jar href="web-printer-handler__V1.0.jar"/>
+    </resources>
+    <applet-desc
+            name="My Applet"
+            main-class="br.com.kauedb.web_printer_handler.PrinterApplication">
+    </applet-desc>
+    <update check="background"/>
+</jnlp>
